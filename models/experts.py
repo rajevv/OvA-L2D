@@ -42,6 +42,25 @@ class synth_expert:
 				outs[i] = prediction_rand
 		return outs
 
+	def predict_prob(self, input, labels, p1=0.75, p2=0.20):
+		batch_size = labels.size()[0]
+		outs = [0] * batch_size
+		for i in range(0, batch_size):
+			if labels[i][0].item() <= self.k:
+				coin_flip = np.random.binomial(1, p1)
+				if coin_flip == 1:
+					outs[i] = labels[i][0].item()
+				if coin_flip == 0:
+					outs[i] = random.randint(0, self.n_classes - 1)
+			else:
+				coin_flip = np.random.binomial(1, p2)
+				if coin_flip == 1:
+					outs[i] = labels[i][0].item()
+				if coin_flip == 0:
+					outs[i] = random.randint(0, self.n_classes - 1)
+		return outs
+
+
 	def predict_biased(self, input, labels):
 		batch_size = labels.size()[0]
 		outs = [0]*batch_size

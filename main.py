@@ -49,12 +49,13 @@ def evaluate(model,
 	total = 0
 	real_total = 0
 	alone_correct = 0
+	alpha = config["alpha"]
 	losses = []
 	with torch.no_grad():
-		for data in loader:
+		for data in data_loader:
 			images, labels = data
 			images, labels = images.to(device), labels.to(device)
-			outputs = net(images)
+			outputs = model(images)
 			if config["loss_type"] == "softmax":
 				outputs = F.softmax(outputs, dim=1)
 			if config["loss_type"] == "ova":
@@ -110,7 +111,7 @@ def evaluate(model,
 				"classifier_accuracy": 100 * correct / (total + 0.0001),
 				"alone_classifier": 100 * alone_correct / real_total,
 				"validation_loss": np.average(losses)}
-	# print(to_print, flush=True)
+	print(to_print, flush=True)
 	return to_print
 
 def train_epoch(iters,

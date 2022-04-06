@@ -3,3 +3,5 @@ Data/
 Models/
 *.swp
 .nfs*
+*.out
+*.sw*

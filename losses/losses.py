@@ -24,3 +24,22 @@ class Criterion(object):
 		outputs = -m * torch.log2(outputs[range(batch_size), rc]) - m2 * torch.log2(
 			outputs[range(batch_size), labels])  
 		return torch.sum(outputs) / batch_size
+
+	def ova(self, outputs, m, labels, m2, n_classes):
+		batch_size = outputs.size()[0]
+    	l1 = Criterion.LogisticLoss(outputs[range(batch_size), labels], 1)
+    	l2 = torch.sum(Criterion.LogisticLoss(outputs[:,:n_classes], -1), dim=1) - Criterion.LogisticLoss(outputs[range(batch_size),labels],-1)
+    	l3 = Criterion.LogisticLoss(outputs[range(batch_size), n_classes], -1)
+    	l4 = Criterion.LogisticLoss(outputs[range(batch_size), n_classes], 1)
+
+    	l5 = m*(l4 - l3)
+
+    	l = m2*(l1 + l2) + l3 + l5
+
+    	return torch.mean(l)
+
+    @staticmethod
+    def LogisticLoss(outputs, y):
+	    outputs[torch.where(outputs==0.0)] = (-1*y)*(-1*np.inf)
+	    l = torch.log2(1 + torch.exp((-1*y)*outputs))
+	    return l

@@ -78,7 +78,7 @@ fig1.savefig('./R_Expert_BiasedK5_uncalibrated_Rejector_Sontag_new.pdf')
 
 true_loss = torch.ones(true_cifar.shape[0])
 ids_class_lt_k = torch.where(true_cifar <= 5)
-true_loss[ids_class_lt_k] = 1.0 - 0.725
+true_loss[ids_class_lt_k] = 1.0 - 0.75
 ids_class_gt_k = torch.where(true_cifar > 5)
 true_loss[ids_class_gt_k] = 1.0 - 0.1
 

@@ -272,7 +272,10 @@ def train(model,
 
 
 def main(config):
+	
+	config["ckp_dir"] = config["ckp_dir"] + '/' + config["loss_type"]
 	os.makedirs(config["ckp_dir"], exist_ok=True)
+
 	expert = synth_expert(config["k"], config["n_classes"])
 	expert_fn = getattr(expert, config["expert_type"])
 	model = WideResNet(28, 3, int(config["n_classes"]) + 1, 4, dropRate=0.0)

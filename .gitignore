@@ -6,3 +6,5 @@ Models/
 *.out
 *.sw*
 *.zip
+*.pkl
+*.pt

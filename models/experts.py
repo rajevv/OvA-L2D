@@ -32,13 +32,28 @@ class synth_expert:
 		outs = [0] * batch_size
 		for i in range(0, batch_size):
 			if labels[i][0].item() <= self.k:
-				coin_flip = np.random.binomial(1, 0.7)
+				coin_flip = np.random.binomial(1, 0.75)
 				if coin_flip == 1:
 					outs[i] = labels[i][0].item()
 				if coin_flip == 0:
 					outs[i] = random.randint(0, self.n_classes - 1)
 			else:
 				prediction_rand = random.randint(0, self.n_classes - 1)
+				outs[i] = prediction_rand
+		return outs
+
+	def predict_biasedK_strict(self, input, labels):
+		batch_size = labels.size()[0]  # batch_size
+		outs = [0] * batch_size
+		for i in range(0, batch_size):
+			if labels[i][0].item() <= self.k:
+				coin_flip = np.random.binomial(1, 0.75)
+				if coin_flip == 1:
+					outs[i] = labels[i][0].item()
+				if coin_flip == 0:
+					outs[i] = random.randint(k+1, self.n_classes - 1)
+			else:
+				prediction_rand = random.randint(k+1, self.n_classes - 1)
 				outs[i] = prediction_rand
 		return outs
 
@@ -72,6 +87,7 @@ class synth_expert:
 				outs[i] = random.randint(0, self.n_classes - 1)
 		return outs
 
+	# predicts randomly across all the classes
 	def predict_random(self, input, labels):
 		batch_size = labels.size()[0]  # batch_size
 		outs = [0] * batch_size

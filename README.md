@@ -46,4 +46,4 @@ optional arguments:
 
 
 ## Acknowledgements 
-We greatly acknowledge Hussein Mozannar and David Sontag. The code in this repo is adapted from their work on Consistent Estimators for Learning to Defer (https://github.com/clinicalml/learn-to-defer). 
+As with everything else, the code in this repo is built upon the excellent works of other researchers. We greatly acknowledge Hussein Mozannar and David Sontag. Their code for the paper Consistent Estimators for Learning to Defer (https://github.com/clinicalml/learn-to-defer) formed the basis of this repository. Additionally, we use code from Nastaran Okati et al. (https://github.com/Networks-Learning/differentiable-learning-under-triage) and Matthijs Hollemans (https://github.com/hollance/reliability-diagrams). 

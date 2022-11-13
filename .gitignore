@@ -8,3 +8,5 @@ Models/
 *.zip
 *.pkl
 *.pt
+Galaxy-Zoo/
+HAM10000/

@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=6
 #SBATCH --time=1:00:00
 #SBATCH --mem=48000M
-#SBATCH --output=Softmax_expert_prob.out
+#SBATCH --output=analyse_softmax.out
 
 module purge
 module load 2020
@@ -21,6 +21,6 @@ module load Anaconda3/2020.02
 source activate defer
 
 #run experiment
-srun python main.py --loss_type softmax --expert_type predict_prob --k 5
+srun python validation.py --loss_type softmax --expert_type predict_prob --k 5
 
 
